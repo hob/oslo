@@ -42,17 +42,14 @@ type Objective struct {
 
 // SLOSpec struct which mapped one to one with kind: slo yaml definition, internal use.
 type SLOSpec struct {
-	Description     string       `yaml:"description,omitempty" validate:"max=1050,omitempty"`
-	Service         string       `yaml:"service" validate:"required" example:"webapp-service"`
-	Indicator       *SLIInline   `yaml:"indicator,omitempty" validate:"required_without=IndicatorRef"`
-	IndicatorRef    *string      `yaml:"indicatorRef,omitempty"`
-	BudgetingMethod string       `yaml:"budgetingMethod" validate:"required,oneof=Occurrences Timeslices" example:"Occurrences"` //nolint:lll
-	TimeWindow      []TimeWindow `yaml:"timeWindow" validate:"required,len=1,dive"`
-	Objectives      []Objective  `yaml:"objectives" validate:"required,dive"`
-	// We don't make clear in the spec if this is a ref or inline.
-	// We will make it a ref for now.
-	// https://github.com/OpenSLO/OpenSLO/issues/133
-	AlertPolicies []string `yaml:"alertPolicies" validate:"dive"`
+	Description     string        `yaml:"description,omitempty" validate:"max=1050,omitempty"`
+	Service         string        `yaml:"service" validate:"required" example:"webapp-service"`
+	Indicator       *SLIInline    `yaml:"indicator,omitempty" validate:"required_without=IndicatorRef"`
+	IndicatorRef    *string       `yaml:"indicatorRef,omitempty"`
+	BudgetingMethod string        `yaml:"budgetingMethod" validate:"required,oneof=Occurrences Timeslices" example:"Occurrences"` //nolint:lll
+	TimeWindow      []TimeWindow  `yaml:"timeWindow" validate:"required,len=1,dive"`
+	Objectives      []Objective   `yaml:"objectives" validate:"required,dive"`
+	AlertPolicies   []AlertPolicy `yaml:"alertPolicies" validate:"dive"`
 }
 
 // SLO struct which mapped one to one with kind: slo yaml definition, external usage.

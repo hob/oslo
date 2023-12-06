@@ -17,10 +17,8 @@ package v1
 
 import (
 	"fmt"
-
-	"gopkg.in/yaml.v3"
-
 	"github.com/OpenSLO/oslo/pkg/manifest"
+	"gopkg.in/yaml.v3"
 )
 
 // APIVersion is a value of valid apiVersions.
@@ -93,6 +91,18 @@ func (a *Label) UnmarshalYAML(value *yaml.Node) error {
 		*a = multi
 	}
 	return nil
+}
+
+func (a Label) MarshalYAML() (interface{}, error) {
+	if len(a) == 1 {
+		return a[0], nil
+	} else {
+		values := make([]string, 0)
+		for _, v := range a {
+			values = append(values, v)
+		}
+		return values, nil
+	}
 }
 
 type Labels map[string]Label

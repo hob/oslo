@@ -59,8 +59,9 @@ type AlertNotificationTargetSpec struct {
 
 // AlertPolicy is a policy for sending alerts.
 type AlertPolicy struct {
-	ObjectHeader `yaml:",inline"`
-	Spec         AlertPolicySpec `yaml:"spec"`
+	ObjectHeader   `yaml:",inline"`
+	Spec           AlertPolicySpec `yaml:"spec,omitempty"`
+	AlertPolicyRef string          `yaml:"alertPolicyRef,omitempty"`
 }
 
 // AlertPolicyCondition is a condition that is used to trigger an alert in an alert policy.  It can
