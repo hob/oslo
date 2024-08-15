@@ -9,6 +9,12 @@ information also check the website: [openslo.com](https://openslo.com/).
 
 ## Installation
 
+### Go install
+
+```sh
+go install github.com/OpenSLO/oslo/cmd/oslo@latest
+```
+
 ### From source
 
 1. Checkout this repository
@@ -29,7 +35,7 @@ For example, if you had an OpenSLO spec file in the current directory called `my
 and you wanted to validate it, the full command would be:
 
 ```bash
-# docker run -v "$(pwd):/manifests" ghcr.io/openslo/oslo:latest validate /manifests/myservice.yaml
+# docker run -v "$(pwd):/manifests" ghcr.io/openslo/oslo:latest validate -f /manifests/myservice.yaml
 Valid!
 ```
 
