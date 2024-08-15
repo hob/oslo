@@ -17,6 +17,12 @@ limitations under the License.
 */
 package v1
 
+import (
+	"fmt"
+	"gopkg.in/yaml.v3"
+	"strings"
+)
+
 // Calendar struct represents calendar time window.
 type Calendar struct {
 	StartTime string `yaml:"startTime" validate:"required,dateWithTime" example:"2020-01-21 12:30:00"`
@@ -30,12 +36,34 @@ type TimeWindow struct {
 	Calendar  *Calendar `yaml:"calendar,omitempty" validate:"required_if=IsRolling false"`
 }
 
+type Target float64
+
+func (t Target) MarshalYAML() (interface{}, error) {
+	//Max 5 decimal places
+	value := fmt.Sprintf("%.5F", t)
+	value = strings.TrimRight(value, "0")
+	return yaml.Node{
+		Kind:        8,
+		Style:       32,
+		Tag:         "",
+		Value:       value,
+		Anchor:      "",
+		Alias:       nil,
+		Content:     nil,
+		HeadComment: "",
+		LineComment: "",
+		FootComment: "",
+		Line:        0,
+		Column:      0,
+	}, nil
+}
+
 // Objective represents single threshold for SLO, for internal usage.
 type Objective struct {
 	DisplayName     string  `yaml:"displayName,omitempty"`
 	Op              string  `yaml:"op,omitempty" example:"lte"`
 	Value           float64 `yaml:"value,omitempty" validate:"numeric,omitempty"`
-	Target          float64 `yaml:"target" validate:"required,numeric,gte=0,lt=1" example:"0.9"`
+	Target          Target  `yaml:"target" validate:"required,numeric,gte=0,lt=1" example:"0.9"`
 	TimeSliceTarget float64 `yaml:"timeSliceTarget,omitempty" validate:"gte=0,lte=1,omitempty" example:"0.9"`
 	TimeSliceWindow string  `yaml:"timeSliceWindow,omitempty" example:"5m"`
 }

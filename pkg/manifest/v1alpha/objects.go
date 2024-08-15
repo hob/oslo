@@ -80,7 +80,7 @@ type SLOSpec struct {
 
 // Indicator represents integration with metric source.
 type Indicator struct {
-	ThresholdMetric MetricSourceSpec `yaml:"thresholdMetric" validate:"required"`
+	ThresholdMetric MetricSourceSpec `yaml:"thresholdMetric,omitempty" validate:"required"`
 }
 
 // MetricSourceSpec represents the metric source.

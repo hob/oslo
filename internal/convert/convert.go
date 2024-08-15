@@ -185,7 +185,7 @@ func getN9SLObjects(
 
 		// Check that the alert policy name is in the list of alert policies, and warn the user if it isn't.
 		for _, ap := range s.Spec.AlertPolicies {
-			if !stringInSlice(ap, alertPolicies) {
+			if !stringInSlice(ap.Metadata.Name, alertPolicies) {
 				_ = printWarning(
 					fmt.Sprintf(
 						"Alert policy %s is not in the list of alert policies for SLO %s. "+

@@ -60,14 +60,14 @@ type RatioMetric struct {
 
 // MetricSourceHolder represents the metric source holder.
 type MetricSourceHolder struct {
-	MetricSource MetricSource `yaml:"metricSource" validate:"required"`
+	MetricSource MetricSource `yaml:"metricSource,omitempty" validate:"required"`
 }
 
 // MetricSource represents the metric source.
 type MetricSource struct {
 	MetricSourceRef  string            `yaml:"metricSourceRef,omitempty" validate:"required_without=MetricSourceSpec"`
 	Type             string            `yaml:"type,omitempty" validate:"required_without=MetricSourceRef"`
-	MetricSourceSpec map[string]string `yaml:"spec" validate:"required_without=MetricSourceRef"`
+	MetricSourceSpec map[string]string `yaml:"spec,omitempty" validate:"required_without=MetricSourceRef"`
 }
 
 // UnmarshalYAML is used to override the default unmarshal behavior

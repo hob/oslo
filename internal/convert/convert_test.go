@@ -680,7 +680,7 @@ func Test_getParsedObjects(t *testing.T) {
 								Target:      0.98,
 							},
 						},
-						AlertPolicies: []string{},
+						AlertPolicies: []v1.AlertPolicy{},
 					},
 				},
 				v1.SLI{
