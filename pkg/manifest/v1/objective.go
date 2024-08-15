@@ -60,12 +60,12 @@ func (t Target) MarshalYAML() (interface{}, error) {
 
 // Objective represents single threshold for SLO, for internal usage.
 type Objective struct {
-	DisplayName     string  `yaml:"displayName,omitempty"`
-	Op              string  `yaml:"op,omitempty" example:"lte"`
-	Value           float64 `yaml:"value,omitempty" validate:"numeric,omitempty"`
-	Target          Target  `yaml:"target" validate:"required,numeric,gte=0,lt=1" example:"0.9"`
-	TimeSliceTarget float64 `yaml:"timeSliceTarget,omitempty" validate:"gte=0,lte=1,omitempty" example:"0.9"`
-	TimeSliceWindow string  `yaml:"timeSliceWindow,omitempty" example:"5m"`
+	DisplayName     string `yaml:"displayName,omitempty"`
+	Op              string `yaml:"op,omitempty" example:"lte"`
+	Value           Target `yaml:"value,omitempty" validate:"numeric,omitempty"`
+	Target          Target `yaml:"target" validate:"required,numeric,gte=0,lt=1" example:"0.9"`
+	TimeSliceTarget Target `yaml:"timeSliceTarget,omitempty" validate:"gte=0,lte=1,omitempty" example:"0.9"`
+	TimeSliceWindow string `yaml:"timeSliceWindow,omitempty" example:"5m"`
 }
 
 // SLOSpec struct which mapped one to one with kind: slo yaml definition, internal use.
